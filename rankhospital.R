@@ -1,7 +1,7 @@
 # Function to read data and provide the Hospital with the given ranking for
 # the given state
 
-rankhospital <- function(state, outcome, num) {
+rankhospital <- function(state, outcome, num = "best") {
   dat <- read.csv("outcome-of-care-measures.csv", stringsAsFactors = FALSE)
   
   # sanity check for state name and outcome
