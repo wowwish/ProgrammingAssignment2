@@ -22,10 +22,16 @@ rankall <- function(outcome, num = "best") {
   # tie situations
   dat <- dat[order(dat[, col], dat[, 2]),]
   
-  dat <- tapply(dat[, 2], dat[, 7], function (x) {
+  # Extracting the Hospitals of given rank for each state
+  hospitals <- tapply(dat[, 2], dat[, 7], function (x) {
     if (num == "best") { return(x[1]) }
     if (num == "worst") { return(x[length(x)]) }
     if (is.numeric(num) & num > length(x)) { return(NA) }
     return(x[num])
   })
+  
+  # returning in the appropriate format of dataframe
+  hospitals <- data.frame(hospital = hospitals)
+  hospitals$state <- rownames(hospitals)
+  hospitals
 }
